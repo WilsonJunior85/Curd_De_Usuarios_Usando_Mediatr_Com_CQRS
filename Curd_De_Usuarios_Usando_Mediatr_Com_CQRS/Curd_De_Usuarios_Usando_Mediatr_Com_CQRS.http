@@ -1,0 +1,6 @@
+@Curd_De_Usuarios_Usando_Mediatr_Com_CQRS_HostAddress = http://localhost:5205
+
+GET {{Curd_De_Usuarios_Usando_Mediatr_Com_CQRS_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
