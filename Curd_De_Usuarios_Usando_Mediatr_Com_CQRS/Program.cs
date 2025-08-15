@@ -1,5 +1,6 @@
 using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+//Parametrizando o MediatR
+builder.Services.AddMediatR(options =>
+{
+    options.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
 });
 
 
