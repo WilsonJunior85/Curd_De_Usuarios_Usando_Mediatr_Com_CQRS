@@ -1,6 +1,8 @@
 using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Scalar;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.MapScalarApiReference();
     app.MapOpenApi();
 }
 
