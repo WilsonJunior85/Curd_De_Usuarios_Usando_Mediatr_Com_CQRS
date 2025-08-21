@@ -1,5 +1,6 @@
 ﻿using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Commands.Create;
 using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Queries.GetAllUsers;
+using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Queries.GetUserById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,18 @@ namespace Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Controllers
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllUsersQuery());
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var result = await _mediator.Send(new GetUserByIdQuery(id));
+
+            if (result is null) return NotFound("Registro não localizado!");
+            
+
+         
             return Ok(result);
         }
     }
