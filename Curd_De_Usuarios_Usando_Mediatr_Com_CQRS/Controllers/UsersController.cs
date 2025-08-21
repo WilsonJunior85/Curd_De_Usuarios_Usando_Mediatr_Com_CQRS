@@ -1,4 +1,5 @@
 ﻿using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Commands.Create;
+using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Queries.GetAllUsers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,13 @@ namespace Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Controllers
         {
             var id = await _mediator.Send(command);
             return Created();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetAllUsersQuery());
+            return Ok(result);
         }
     }
 }
