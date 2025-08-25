@@ -1,4 +1,5 @@
 ﻿using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Commands.Create;
+using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Commands.Update;
 using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Queries.GetAllUsers;
 using Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Features.Users.Queries.GetUserById;
 using MediatR;
@@ -44,6 +45,17 @@ namespace Curd_De_Usuarios_Usando_Mediatr_Com_CQRS.Controllers
 
          
             return Ok(result);
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result) return NotFound("Registro não localizado");
+
+            return NoContent();
         }
     }
 }
